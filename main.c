@@ -88,8 +88,8 @@ int main()
       break;
       }
       printf("Do you want to continue?(Y/N): ");
+      getchar();
       scanf("%c", &choice);    
-      getchar();  
       if(choice == 'N' || choice == 'n')
 	system("clear");
     }while(choice == 'Y' || choice == 'y');
