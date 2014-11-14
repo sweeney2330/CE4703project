@@ -16,7 +16,7 @@ int main()
   int finished =1;
   polynomial test, ans,ans2;
   setupPolynomial(&test);
-  polynomial add = {{4,5,6,7,8},5}; // This polynomial will be added to the user one as a test.
+  polynomial add = {{4.0,5.0,6.0,7.0,8.0},5}; // This polynomial will be added to the user one as a test.
   printf("Do you wish to create a polynomial? (1=yes/0=no)  ");
   scanf("%d", &create);  
   if (create == 1)
