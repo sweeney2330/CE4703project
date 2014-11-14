@@ -10,6 +10,10 @@ File that contains all the functions that interact with the polynomials
 
 void setupPolynomial (polynomial *p)
 {
+//	for(i=0;i<100;i++)
+//	{
+//		p->data[i]=0;
+//	}
  p->next = 0; i
 }
 void addCoefficient(int order, double coefficient, polynomial *p) // this function is more of an "add coefficient" than it is create polynomial
@@ -83,7 +87,8 @@ void printPolynomial(polynomial *poly)
 {
   int i =0;
   for(i=0;i<=poly->next;i++)
-    {
-      printf("%.2lf*X^%d ", poly->data[i],i);
-    }
+  {
+    if(i==poly->next) printf("%.21f*X^%d \n", poly->data[i],i);
+    else printf("%.2lf*X^%d+", poly->data[i],i);
+  }
 }
