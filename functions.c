@@ -10,18 +10,17 @@ File that contains all the functions that interact with the polynomials
 
 void setupPolynomial (polynomial *p)
 {
- p->next = 0; 
+ p->next = 0; i
 }
-void addCoefficient(int degree, int coefficient, polynomial *p) // this function is more of an "add coefficient" than it is create polynomial
+void addCoefficient(int order, double coefficient, polynomial *p) // this function is more of an "add coefficient" than it is create polynomial
 /* Without knowing how to store the array, this function will just take a coefficient
  * and the assiciated degree and give place it in the stack in the degrees location.
  */
 {
-  
   p->data[degree]=  coefficient;
-  if(p->next < degree)// next being changed to store the degree of the polynomial
+  if(p->next < order)// next being changed to store the degree of the polynomial
     {
-      p->next = degree;
+      p->next = order;
     }
 }
 polynomial arithmatic(polynomial *first, polynomial *second,operation a) 
@@ -34,7 +33,7 @@ polynomial arithmatic(polynomial *first, polynomial *second,operation a)
    *an out of bounds element.
    */
   int i =0;
-  int highest = first->next; //stores highest degree to tell addition where to stop
+  int highest =  first->next; //stores highest degree to tell addition where to stop
   int lowestHigh = second->next; //stores lower degrees highest degree to tell it where it does not exist
   polynomial answer;
   answer.next = highest;
