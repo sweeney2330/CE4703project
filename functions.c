@@ -4,24 +4,40 @@ File that contains all the functions that interact with the polynomials
 
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "polynomial.h"
 
 
-void setupPolynomial (polynomial *p)
+void createPolynomial (polynomial *p)
 {
- p->next = 0; 
+/*This function will create a polynomial or delete it
+ *TODO: Add code to delete the polynomial
+ */
+//	for(i=0;i<100;i++)
+//	{
+//		p->data[i]=0;
+//	}
+ p->next = 0;
+ int i;
+ int order;
+ int coeff;
+ printf("What is the order of this polynomial?   ");
+ scanf("%d", &order);
+ for(i=0;i<=order;i++)
+   {
+     printf("Please enter the coefficient of X^%d:   ",i);
+     scanf("%d", &coeff);
+     addCoefficient(i,coeff,p);
+   }
 }
-void addCoefficient(int degree, int coefficient, polynomial *p) // this function is more of an "add coefficient" than it is create polynomial
+void addCoefficient(int order, double coefficient, polynomial *p) // this function is more of an "add coefficient" than it is create polynomial
 /* Without knowing how to store the array, this function will just take a coefficient
- * and the assiciated degree and give place it in the stack in the degrees location.
+ * and the assiciated degree and give place it in the stack in the orders location.
  */
 {
-  
-  p->data[degree]=  coefficient;
-  if(p->next < degree)// next being changed to store the degree of the polynomial
+  p->data[order]=  coefficient;
+  if(p->next < order)// next being changed to store the order of the polynomial
     {
-      p->next = degree;
+      p->next = order;
     }
 }
 polynomial arithmatic(polynomial *first, polynomial *second,operation a) 
@@ -34,7 +50,7 @@ polynomial arithmatic(polynomial *first, polynomial *second,operation a)
    *an out of bounds element.
    */
   int i =0;
-  int highest = first->next; //stores highest degree to tell addition where to stop
+  int highest =  first->next; //stores highest degree to tell addition where to stop
   int lowestHigh = second->next; //stores lower degrees highest degree to tell it where it does not exist
   polynomial answer;
   answer.next = highest;
@@ -84,7 +100,8 @@ void printPolynomial(polynomial *poly)
 {
   int i =0;
   for(i=0;i<=poly->next;i++)
-    {
-      printf("%.2lf*X^%d ", poly->data[i],i);
-    }
+  {
+    if(i==poly->next) printf("%.21f*X^%d \n", poly->data[i],i);
+    else printf("%.2lf*X^%d+", poly->data[i],i);
+  }
 }
