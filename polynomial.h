@@ -15,9 +15,8 @@ typedef struct{
 
 //function declarations
 void setupPolynomial (polynomial *p);
-void addCoefficient(int degree, int coefficient, polynomial *p);
+void addCoefficient(int order, double coefficient, polynomial *p);
 polynomial arithmatic(polynomial *first, polynomial *second,operation a);
-void createPolynomial(int degree, int coefficient, polynomial *p);
 void scalarDivision(polynomial *poly);
 void normalise(polynomial *poly);
 void polynomialOrder(polynomial *poly);
