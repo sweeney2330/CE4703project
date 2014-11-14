@@ -4,25 +4,38 @@ File that contains all the functions that interact with the polynomials
 
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "polynomial.h"
 
 
-void setupPolynomial (polynomial *p)
+void createPolynomial (polynomial *p)
 {
+/*This function will create a polynomial or delete it
+ *TODO: Add code to delete the polynomial
+ */
 //	for(i=0;i<100;i++)
 //	{
 //		p->data[i]=0;
 //	}
- p->next = 0; i
+ p->next = 0;
+ int i;
+ int order;
+ int coeff;
+ printf("What is the order of this polynomial?   ");
+ scanf("%d", &order);
+ for(i=0;i<=order;i++)
+   {
+     printf("Please enter the coefficient of X^%d:   ",i);
+     scanf("%d", &coeff);
+     addCoefficient(i,coeff,p);
+   }
 }
 void addCoefficient(int order, double coefficient, polynomial *p) // this function is more of an "add coefficient" than it is create polynomial
 /* Without knowing how to store the array, this function will just take a coefficient
- * and the assiciated degree and give place it in the stack in the degrees location.
+ * and the assiciated degree and give place it in the stack in the orders location.
  */
 {
-  p->data[degree]=  coefficient;
-  if(p->next < order)// next being changed to store the degree of the polynomial
+  p->data[order]=  coefficient;
+  if(p->next < order)// next being changed to store the order of the polynomial
     {
       p->next = order;
     }
