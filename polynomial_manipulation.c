@@ -7,7 +7,8 @@
 //        4) Division
 //        5) Normalization
 //        6) Order
-//  Author: Ian Lodovica
+//
+//  Author: Group 3
 //  ID: 13131567
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
@@ -15,77 +16,74 @@
 #include "adt_header.h"
 
 /*
-  Add two polynomials
+  Add two polynomials. All assignments are done by pass by reference.
 
   @param polynomial *a address of the first polynomial
   @param polynomial *b address of the second polynomial
-  
-  @return sum the sum of the two polynomials
- */
-polynomial add(polynomial *a, polynomial *b){
-  //find the highest order of each polynomial
-  //will be used to control loops later on
-  int a_length = a->length;
-  int b_length = b->length;
-  
-  //max of the two lengths assigned to sum's length because
-  //it's a combination of the two polynomials.
-  polynomial sum;
-  sum.length = MAX(a_length, b_length);
+  @param polynomial *out address of the resultant polynomial
 
-  //variables to be used while calculating the sum of two coeffs
-  //at each iteration
-  int current_a;
-  int current_b;
+ */
+void add(polynomial *a, polynomial *b, polynomial *out){
+  //initialise array with proper allocated memory
+  //macro found in header, finds the two max
+  int size = MAX(a->length, b->length);
+  initialise(out, size);
+
 
   //loop through both polynomials, add each element
-  for(int i = 0; i < sum.length; i++){
-    //store current value of the polynomial
-    current_a = a->poly[i];
-    current_b = b->poly[i];
+  for(int i = 0; i <= size; i++){
+    //check if each arrays are finished
+    if( i <= a->length && i <= b->length){
 
-    //store the sum of the current elements
-    //in the new polynomial to be returned
-    sum.poly[i] = current_a + current_b;
+      //store the sum of the current elements
+      //in the new polynomial to be returned
+      out->poly[i] = a->poly[i] + b->poly[i];
+    }else{
+      //throw in whatever's left if one of the arrays are exhausted
+      if( a->length > b->length){
+	out->poly[i] = a->poly[i];
+      }else{
+	out->poly[i] = b->poly[i];
+      }
+    }
   }
-  return sum;
+
+  return;
 }
 
 /*
-  Subtract two polynomials
+  Subtract two polynomials. All assignments are done by pass by reference.
  
   @param polynomial *a address of the first polynomial
   @param polynomial *b address of the second  polynomial
- 
-  @return the difference of the two polynomials
+  @param polynomial *out address of the resultant polynomial
+
  */
-polynomial subtract(polynomial *a, polynomial *b){
-  //find the highest order of each polynomial
-  //will be used to control loops later on
-  int a_length = a->length;
-  int b_length = b->length;
-  
-  //max of the two lengths assigned to sum's length because
-  //it's a combination of the two polynomials.
-  polynomial difference;
-  difference.length = MAX(a_length, b_length);
+void subtract(polynomial *a, polynomial *b, polynomial *out){
+  //initialise array with proper allocated memory
+  int size = MAX(a->length, b->length);
+  initialise(out, size);
 
-  //variables to be used while calculating the difference of two coeffs
-  //at each iteration
-  int current_a;
-  int current_b;
 
-  //loop through both polynomials, add each element
-  for(int i = 0; i < difference.length; i++){
-    //store current value of the poly coeff
-    current_a = a->poly[i];
-    current_b = b->poly[i];
+  //loop through both polynomials, subtract  each element
+  for(int i = 0; i <= size; i++){
+    //check if each arrays are finished
+    if( i <= a->length && i <= b->length){
 
-    //store the difference of the current elements
-    //in the new polynomial to be returned
-    difference.poly[i] = current_a - current_b;
+      //store the sum of the current elements
+      //in the new polynomial to be returned
+      out->poly[i] = a->poly[i] - b->poly[i];
+    }else{
+      //throw in whatever's left if one of the arrays are exhausted
+      if( a->length > b->length){
+	out->poly[i] = a->poly[i];
+      }else{
+	out->poly[i] = b->poly[i];
+      }
+    }
   }
-  return difference;
+
+  return;
 }
 
 /*
@@ -93,25 +91,23 @@ polynomial subtract(polynomial *a, polynomial *b){
  
   @param polynomial *a address of the polynomial
   @param double double_coeff used to multiply the polynomial
-
-  @return result multiple of the original polynomial
+  @param polynomial *out address of the resultant polynomial
  */
-polynomial multiply(polynomial *a, double double_coeff){
-  //initialize the resulting polynomial.
-  polynomial result;
-  result.length = a->length;
+void multiply(polynomial *a, double double_coeff, polynomial *out){
+  //initialize poly array with correct memory allocation
+  initialise(out, a->length);
 
   int current_a;
   //loop through poly 'a' and each element 
-  //multiply by the double coeff
-  for(int i = 0; i <result.length; i++){
+  //multiplied by the double coeff
+  for(int i = 0; i <= a->length; i++){
     //store current value of poly coeff
     current_a = a->poly[i];
 
     //at each iteration store the evaluation to result
-    result.poly[i] = (current_a)*(double_coeff);
+    out->poly[i] = (current_a)*(double_coeff);
   }
-  return result;
+  return;
 }
 
 /*
@@ -119,62 +115,55 @@ polynomial multiply(polynomial *a, double double_coeff){
 
   @param polynomial *a address of the polynomial 'a'
   @param double_coeff used to divide the polynomial
-
-  @return result the original polynomial divided across by double_coeff
+  @param polynomial *out address of the resultant polynomial
  */
-polynomial divide(polynomial *a, double double_coeff){
-  //initialize the resulting polynomial.
-  polynomial result;
-  result.length = a->length;
+void divide(polynomial *a, double double_coeff, polynomial *out){
+  //initialize poly array with correct memory allocation
+  initialise(out, a->length);
 
   int current_a;
   //loop through poly 'a' and each element 
-  //divided by the double coeff
-  for(int i = 0; i <result.length; i++){
+  //diveded by the double coeff
+  for(int i = 0; i <= a->length; i++){
     //store current value of poly coeff
     current_a = a->poly[i];
 
-    //at each iteration store the evaluation to result
-    result.poly[i] = (current_a)/(double_coeff);
+    //at each iteration store the evaluation to the 
+    //corresponding address for the poly array
+    out->poly[i] = (current_a)/(double_coeff);
   }
-  return result;
+  return;
 }
 
 /*
   Normalize a polynomial
   
   @param polynomial *a the address of the polynomial
-
-  @return the normalized polynomial
+  @param polynomial *out the address of the resultant polynomial
  */
-polynomial normalise(polynomial *a){
+void normalise(polynomial *a, polynomial *out){
+  initialise(out, a->length);
+
   //set the max before hand to compare
   int max = a->poly[0];
   
-  //initialize the resulting polynomial
-  polynomial result;
-  result.length = a->length;
   
-  //used to keep track of current coeff
-  int current_a;
   //find the max which will become the normalising coeff
-  for(int i = 1; i <= result.length; i++){
-    current_a = a->poly[i];
-    max = MAX(max, current_a);
+  for(int i = 1; i <= a->length; i++){
+    max = MAX(max, a->poly[i]);
   }
-  //use divide function from before :)
-  result = divide(a, max);
 
-  return result;
+  //use divide function from before :)
+  divide(a, max, out);
+
 }
 
 /*
   Order of the polynomial
 
   @param polynomial *a address of the polynomial
-
   @return the order of the polynomial
 */
 int order(polynomial *a){
-  return a->length-1;
+  return a->length;
 }
