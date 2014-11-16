@@ -142,12 +142,33 @@ int main()
       deletePolynomial(&normalised);
       break;
     case 6: 
+      //let the user choose
+      printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
+      scanf("\n%d", (int*)&pick);
+
+      if (pick == A)
+      {
       printf("Order of the polynomial..\n");// Return order goes here
       printf("Order is: %d\n", order(&a));
+  } else {
+  	  printf("Order of the polynomial..\n");// Return order goes here
+      printf("Order is: %d\n", order(&b));
+  }
+
       break;
     case 7:
-      printf("Printing polynomial..\n");// printing goes here
-      print_p(&a);
+    	//let the user choose
+      printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
+      scanf("\n%d", (int*)&pick);
+
+      if (pick == A)
+      {
+      	printf("Printing polynomial..\n");// printing goes here
+      	print_p(&a);
+      } else {
+     	 printf("Printing polynomial..\n");// printing goes here
+      	 print_p(&a);
+  		}
       break;
     default: 
       printf("Invalid input\n");
