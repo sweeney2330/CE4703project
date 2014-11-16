@@ -4,7 +4,7 @@
 //        each process.
 //   
 //  Author: Group 3
-//  ID: 13131567 13133799
+//  ID: 13131567
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
 #include <stdlib.h>
@@ -46,6 +46,7 @@ int main()
   printf("Poly B is: ");
   print_p(&b);
   printf("----------------------------------------------\n"); 
+
 
   do
   {
@@ -180,13 +181,14 @@ int main()
     scanf("\n%c", &choice);    
     
     //checks to make sure flags are correct
-    /* if(choice != 'Y' || choice != 'y' ||  choice != 'N' || choice != 'n'){ */
-    /*   printf("Please enter (Y/N): "); */
-    /*   scanf("\n%c", &choice); */
-    /* } */
+     while((choice != 'Y' && choice != 'y') && (choice != 'N' && choice != 'n')){ 
+       printf("Not Valid input, Please enter (Y/N): "); 
+       scanf("\n%c", &choice); 
+     } 
 
    }while(choice == 'Y' || choice == 'y'); 
  
+
 
   //delete polynomials
   deletePolynomial(&a);
