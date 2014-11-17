@@ -81,7 +81,7 @@ int main()
       printf("Which poly do you want to be multiplied?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correcty
+      //guards to make sure input is correct
        	while(pick != 0 && pick != 1){ 
        	  printf("Please enter [0] or [1]: "); 
        	  scanf("%d",(int*)&pick); 
@@ -109,7 +109,7 @@ int main()
       printf("Which poly do you want to be divided?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correcty
+      //guards to make sure input is correct
        	while(pick != 0 && pick != 1){ 
        	  printf("Please enter [0] or [1]: "); 
        	  scanf("%d",(int*)&pick); 
@@ -136,7 +136,7 @@ int main()
       printf("Which poly do you want to be normalised?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correcty
+      //guards to make sure input is correct
        	while(pick != 0 && pick != 1){ 
        	  printf("Please enter [0] or [1]: "); 
        	  scanf("%d",(int*)&pick); 
@@ -159,7 +159,7 @@ int main()
       printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correcty
+      //guards to make sure input is correct
        	while(pick != 0 && pick != 1){ 
        	  printf("Please enter [0] or [1]: "); 
        	  scanf("%d",(int*)&pick); 
@@ -180,7 +180,7 @@ int main()
       printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-		//guards to make sure input is correcty
+		//guards to make sure input is correct
        	while(pick != 0 && pick != 1){ 
        	  printf("Please enter [0] or [1]: "); 
        	  scanf("%d",(int*)&pick); 
