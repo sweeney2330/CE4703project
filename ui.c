@@ -81,15 +81,15 @@ int main()
       printf("Which poly do you want to be multiplied?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
+      //guards to make sure input is correcty
+       	while(pick != 0 && pick != 1){ 
+       	  printf("Please enter [0] or [1]: "); 
+       	  scanf("%d",(int*)&pick); 
+       	} 
+
       printf("Please enter a double to multiply the polynomial by ");
       scanf("%lf", &double_coeff);    
-      //guards to make sure input is correcty
-      /* if(pick != A && pick != B){ */
-      /* 	while(pick != A && pick != B);{ */
-      /* 	  printf("Please enter [0] or [1]: "); */
-      /* 	  scanf("%d",(int*)&pick); */
-      /* 	} */
-      /* } */
+      
       
       //choose between poly (A) and poly (B)
       if( pick == A ){ //use func on A
@@ -108,6 +108,12 @@ int main()
       //let the user choose
       printf("Which poly do you want to be divided?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
+
+      //guards to make sure input is correcty
+       	while(pick != 0 && pick != 1){ 
+       	  printf("Please enter [0] or [1]: "); 
+       	  scanf("%d",(int*)&pick); 
+       	} 
 
       printf("Please enter a double to divide the polynomial by ");
       scanf("%lf", &double_coeff);
@@ -130,6 +136,12 @@ int main()
       printf("Which poly do you want to be normalised?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
+      //guards to make sure input is correcty
+       	while(pick != 0 && pick != 1){ 
+       	  printf("Please enter [0] or [1]: "); 
+       	  scanf("%d",(int*)&pick); 
+       	} 
+
       if( pick == A ){ //use func on A
 	printf("Normalising (A)\n");
 	normalise(&a, &normalised);
@@ -147,6 +159,12 @@ int main()
       printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
+      //guards to make sure input is correcty
+       	while(pick != 0 && pick != 1){ 
+       	  printf("Please enter [0] or [1]: "); 
+       	  scanf("%d",(int*)&pick); 
+       	} 
+
       if (pick == A)
       {
       printf("Order of the polynomial..\n");// Return order goes here
@@ -162,6 +180,12 @@ int main()
       printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
+		//guards to make sure input is correcty
+       	while(pick != 0 && pick != 1){ 
+       	  printf("Please enter [0] or [1]: "); 
+       	  scanf("%d",(int*)&pick); 
+       	} 
+       	
       if (pick == A)
       {
       	printf("Printing polynomial..\n");// printing goes here
