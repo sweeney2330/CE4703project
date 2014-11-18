@@ -223,9 +223,9 @@ void selection(){
       scanf("\n%c", &proceed);    
 
       //checks to make sure flags are correct
-      while((choice != 'Y' && choice != 'y') && (choice != 'N' && choice != 'n')){ 
+      while((proceed != 'Y' && proceed != 'y') && (proceed != 'N' && proceed != 'n')){ 
 	printf("Not Valid input, Please enter (Y/N): "); 
-	scanf("\n%c", &choice); 
+	scanf("\n%c", &proceed); 
       } 
 
     }while(proceed == 'Y' || proceed == 'y'); 
