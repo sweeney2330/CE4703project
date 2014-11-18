@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////////
-//  File: polynomial_manipulation.c
+//  File: arithmetic.c
 //  Desc: Stores all functions to manipulate the polynomial(s)
 //        1) Addition
 //        2) Subtraction
@@ -13,6 +13,7 @@
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
 #include <stdio.h>
+
 #include "polynomial.h"
 
 /*
@@ -107,6 +108,7 @@ void multiply(polynomial *a, double double_coeff, polynomial *out){
     //at each iteration store the evaluation to result
     out->poly[i] = (current_a)*(double_coeff);
   }
+  
   return;
 }
 
@@ -132,6 +134,7 @@ void divide(polynomial *a, double double_coeff, polynomial *out){
     //corresponding address for the poly array
     out->poly[i] = (current_a)/(double_coeff);
   }
+  
   return;
 }
 
@@ -145,8 +148,7 @@ void normalise(polynomial *a, polynomial *out){
   initialise(out, a->length);
 
   //set the max before hand to compare
-  int max = a->poly[0];
-  
+  int max = a->poly[0];  
   
   //find the max which will become the normalising coeff
   for(int i = 1; i <= a->length; i++){
@@ -156,7 +158,9 @@ void normalise(polynomial *a, polynomial *out){
   //use divide function from before :)
   divide(a, max, out);
 
+  return;
 }
+
 
 /*
   Order of the polynomial

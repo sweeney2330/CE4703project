@@ -1,11 +1,22 @@
 /////////////////////////////////////////////////////////////////////////////////
-//  File: create_delete_poly.c
-//  Desc: creates and deletes polynomials at request
+//  File: polynomial.c
+//  Desc: controls everything that happens to the polynomials at a memory level
 //   
 //  Author: Group 3
 //  ID: 13131567
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
+
+/*
+  Changelog
+  
+  15/11/14
+  1)added a modify polynomial function
+  2)made the checkSize() function more accurate in giving the actual sizes
+  3)moved print_p() here and renamed to printPolynomial.
+
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -34,19 +45,10 @@ void initialise(polynomial *a, int size){
   @return a the polynomial created
 */
 void createPolynomial(polynomial *a){
-  /* typedef enum {TRUE, FALSE} flag; */
-  /* flag is_integer = TRUE;  */
-  /* char extra; */
   int n;
   printf("Enter the order of the polynomial ");
   
   scanf("%d", &n);
-  //scanf() can return 0, 1, EOF. Error pops up if not success (1)
-  /* if(scanf("\n%d", &n) != 1){   */
-  /*     printf("Please input an integer "); */
-  /*     while(getchar() != '\n'); */
-  /*     scanf("\n%d\n", &n); */
-  /* } */
 
   //initialised with abs(n) to turn negative inputs to positive
   initialise(a, abs(n));
@@ -68,20 +70,62 @@ void createPolynomial(polynomial *a){
 
     }
   }
+
   return;
 }
 
+/*
+  delete the polynomial by accessing the address memory of the polynomials
+  and returning it to void
 
+  @param polynomial *a the polynomial to be deleted
+ */
 void deletePolynomial(polynomial *a){
   free(a->poly);
+
+  return;
 }
 
+/*
+  Recreate the polynomial. Can you realloc to change memory to fit the new bill.
+  More sense to just delete the previous array and give new memory
+  
+  @param polynomial *a address of the polynomial to be modified
+ */
+void recreate(polynomial *a){
+  //is this cheating? this is probably cheating.
+  deletePolynomial(a);
+  createPolynomial(a);
+  
+  return;
+}
+
+/*
+  Displays the all information of the polynomial
+
+  @param polynomial *a address of the polynomial to be scanned
+ */
 void checkSizes(polynomial *a){
-  printf("--------------------------------\n");
+  printf("--------------------------------\n"); 
   printf("Length is %d\n", a->length);
-  printf("Size of array is %d\n", a->length * sizeof(double));
-  printf("Size of structure is %d\n", sizeof(polynomial));
-  printf("Size of everything is %d\n" ,sizeof(polynomial) + a->length*sizeof(double));
+  printf("Size of array is %d\n", a->length * sizeof(a->poly));
+  printf("Size of structure is %d\n", sizeof(a));
+  printf("Size of everything is %d\n" ,sizeof(a) + a->length*sizeof(a->poly));
   printf("--------------------------------\n");
+
+  return;
 }
 
+/*
+  Prints out the given polynomial
+
+  @param polynomial *a address of the polynomial to be printed
+ */
+void printPolynomial(polynomial *a){
+  for(int i = 0; i <= a->length; i++){
+    printf("%.2lfx^%d ", a->poly[i], i);
+  }
+  printf("\n");
+  
+  return;
+}

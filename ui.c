@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "adt_header.h"
+#include "polynomial.h"
 
 int main()
 {
@@ -47,8 +47,7 @@ int main()
   print_p(&b);
   printf("----------------------------------------------\n"); 
 
-
-  do
+do
   {
     printf("Enter selection: ");
     scanf("%d", &sel);
@@ -81,11 +80,11 @@ int main()
       printf("Which poly do you want to be multiplied?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correct
-       	while(pick != 0 && pick != 1){ 
-       	  printf("Please enter [0] or [1]: "); 
-       	  scanf("%d",(int*)&pick); 
-       	} 
+      //guards to make sure input is correcty
+        while(pick != 0 && pick != 1){ 
+          printf("Please enter [0] or [1]: "); 
+          scanf("%d",(int*)&pick); 
+        } 
 
       printf("Please enter a double to multiply the polynomial by ");
       scanf("%lf", &double_coeff);    
@@ -93,11 +92,11 @@ int main()
       
       //choose between poly (A) and poly (B)
       if( pick == A ){ //use func on A
-	printf("Multiplying (A) by %.2lf..\n", double_coeff);
-	multiply(&a, double_coeff, &product);
+  printf("Multiplying (A) by %.2lf..\n", double_coeff);
+  multiply(&a, double_coeff, &product);
       } else { //use func on B
-	printf("Multiplying (B) by %.2lf..\n", double_coeff);
-	multiply(&b, double_coeff, &product);
+  printf("Multiplying (B) by %.2lf..\n", double_coeff);
+  multiply(&b, double_coeff, &product);
       }
       print_p(&product);
       
@@ -109,21 +108,21 @@ int main()
       printf("Which poly do you want to be divided?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correct
-       	while(pick != 0 && pick != 1){ 
-       	  printf("Please enter [0] or [1]: "); 
-       	  scanf("%d",(int*)&pick); 
-       	} 
+      //guards to make sure input is correcty
+        while(pick != 0 && pick != 1){ 
+          printf("Please enter [0] or [1]: "); 
+          scanf("%d",(int*)&pick); 
+        } 
 
       printf("Please enter a double to divide the polynomial by ");
       scanf("%lf", &double_coeff);
       
       if( pick == A ){ //use func on A
-	printf("Multiplying (A) by %.2lf..\n", double_coeff);
-	divide(&a, double_coeff, &quotient);
+  printf("Multiplying (A) by %.2lf..\n", double_coeff);
+  divide(&a, double_coeff, &quotient);
       } else { //use func on B
-	printf("Multiplying (B) by %.2lf..\n", double_coeff);
-	divide(&b, double_coeff, &quotient);
+  printf("Multiplying (B) by %.2lf..\n", double_coeff);
+  divide(&b, double_coeff, &quotient);
       }
 
       print_p(&quotient);
@@ -136,17 +135,17 @@ int main()
       printf("Which poly do you want to be normalised?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correct
-       	while(pick != 0 && pick != 1){ 
-       	  printf("Please enter [0] or [1]: "); 
-       	  scanf("%d",(int*)&pick); 
-       	} 
+      //guards to make sure input is correcty
+        while(pick != 0 && pick != 1){ 
+          printf("Please enter [0] or [1]: "); 
+          scanf("%d",(int*)&pick); 
+        } 
 
       if( pick == A ){ //use func on A
-	printf("Normalising (A)\n");
-	normalise(&a, &normalised);
+  printf("Normalising (A)\n");
+  normalise(&a, &normalised);
       } else { //use func on B
-	printf("Normalising (B)\n");
+  printf("Normalising (B)\n");
         normalise(&b, &normalised);
       }
 
@@ -159,41 +158,41 @@ int main()
       printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-      //guards to make sure input is correct
-       	while(pick != 0 && pick != 1){ 
-       	  printf("Please enter [0] or [1]: "); 
-       	  scanf("%d",(int*)&pick); 
-       	} 
+      //guards to make sure input is correcty
+        while(pick != 0 && pick != 1){ 
+          printf("Please enter [0] or [1]: "); 
+          scanf("%d",(int*)&pick); 
+        } 
 
       if (pick == A)
       {
       printf("Order of the polynomial..\n");// Return order goes here
       printf("Order is: %d\n", order(&a));
   } else {
-  	  printf("Order of the polynomial..\n");// Return order goes here
+      printf("Order of the polynomial..\n");// Return order goes here
       printf("Order is: %d\n", order(&b));
   }
 
       break;
     case 7:
-    	//let the user choose
+      //let the user choose
       printf("Which poly do you want the order of?\n[0] for (A)\n[1] for (B)\nChoose: ");
       scanf("\n%d", (int*)&pick);
 
-		//guards to make sure input is correct
-       	while(pick != 0 && pick != 1){ 
-       	  printf("Please enter [0] or [1]: "); 
-       	  scanf("%d",(int*)&pick); 
-       	} 
-       	
+    //guards to make sure input is correcty
+        while(pick != 0 && pick != 1){ 
+          printf("Please enter [0] or [1]: "); 
+          scanf("%d",(int*)&pick); 
+        } 
+        
       if (pick == A)
       {
-      	printf("Printing polynomial..\n");// printing goes here
-      	print_p(&a);
+        printf("Printing polynomial..\n");// printing goes here
+        print_p(&a);
       } else {
-     	 printf("Printing polynomial..\n");// printing goes here
-      	 print_p(&a);
-  		}
+       printf("Printing polynomial..\n");// printing goes here
+         print_p(&a);
+      }
       break;
     default: 
       printf("Invalid input\n");
@@ -212,7 +211,7 @@ int main()
 
    }while(choice == 'Y' || choice == 'y'); 
  
-
+ 
 
   //delete polynomials
   deletePolynomial(&a);

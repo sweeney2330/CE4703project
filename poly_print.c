@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "adt_header.h"
+#include "polynomial.h"
 
 
 void print_p(polynomial *a){
