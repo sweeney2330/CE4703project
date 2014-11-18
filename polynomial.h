@@ -1,5 +1,9 @@
 /////////////////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD:polynomial.h
 //  File: polynomial.h
+=======
+//  File: adt_header.c
+>>>>>>> 612ba99ecdf9ebf0427d7a3ee2d58c60ed6400cc:adt_header.h
 //  Desc: Contains all of the global functon calls/macros/declarations used
 //   
 //  Author: Group 3
