@@ -13,7 +13,6 @@
   15/11/14
   1)changed most operational functions to return void as well as taking
     another parameter *polynomial *out to accomodate changes in the functions.
-  2)Added poly enum
 
  */
 
@@ -21,9 +20,6 @@
 #define POLY_H
 
 #define MAX(a, b) ((a)>=(b)?(a):(b))
-
-//used to choose between polynomials in the UI
-typedef enum {A, B} poly;
 
 typedef struct{
   int length;
@@ -47,7 +43,7 @@ void createPolynomial(polynomial *a);
 void deletePolynomial(polynomial *a);
 void recreate(polynomial *a);
 void checkSizes(polynomial *a);
-void print_p(polynomial *a);
+void printPolynomial(polynomial *a);
 
 //ui.c declarations
 void startScreen();
