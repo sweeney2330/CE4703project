@@ -28,10 +28,14 @@
   @param polynomial *a the poly to be created
   @param int size will allow correct allocation of memory for array
 */
-void initialisePolynomial(polynomial *a, int order){
-  //allocates memory for the  array
+void initialisePolynomial(polynomial *a, int size){
+  /* //the order of a polynomial when given an array is always */
+  /* //n-1 where n is the size of the array. */
+  /* int order = size - 1; */
+
+  //allocates memory for the  array and structure
   //stored to the pointer *poly in struct. 
-  a->poly = (double*)malloc( order * (sizeof(double)) ); 
+  a->poly = (double*)malloc(sizeof(polynomial) + size * (sizeof(double)) ); 
   
   //if memory allocation failed it would return in a NULL
   //this executes when memory allocation is a success      
@@ -40,8 +44,7 @@ void initialisePolynomial(polynomial *a, int order){
     free(a->poly);
   else {
     // memory allocated successfully
-    //arrays start at 0 so we add 1 to match order
-    a->length = order + 1;
+    a->length = size;
     
     //initialise array to be 0
     for( int i = 0; i < a->length; i++){
@@ -59,14 +62,13 @@ void initialisePolynomial(polynomial *a, int order){
  
   @return a the polynomial created
 */
-void addCoeff(polynomial *a, int coeff[]){
+void addCoeff(polynomial *a, double coeff[]){
   //build the array
   for(int i = 0; i < a->length; i++){
-    a->poly[i] = coeff[i];
+      a->poly[i] = coeff[i];  
   }
-  return;
+   return;
 }
-
 /*
   delete the polynomial by accessing the address memory of the polynomials
   and returning it to void
@@ -102,10 +104,14 @@ void checkSizes(polynomial *a){
   @param polynomial *a address of the polynomial to be printed
  */
 void printPolynomial(polynomial *a){
-  for(int i = 0; i < a->length; i++){
+  int max_index = a->length - 1;
+
+  for(int i = max_index; i >= 0; i--){
+    if(a->poly[i] >= 0){
+      printf("+");
+    }
     printf("%.2lfx^%d ", a->poly[i], i);
   }
   printf("\n");
-  
   return;
 }
