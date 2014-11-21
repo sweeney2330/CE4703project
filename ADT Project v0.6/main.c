@@ -20,7 +20,7 @@ int main(){
   //creating base polynomials we'll be using for the entirity of
   //these test cases.
   //
-  //NOTE: second parameter of initalisePolynomial(poly1, size) 
+  //NOTE: second parameter of initalisePolynomial(poly, size) 
   //      MUST match the test case arrays above.
   //////////////////////////////////////////////////////////////////  
   initialisePolynomial(&a, 3);
@@ -119,10 +119,12 @@ int main(){
   printf("--------------------------------------------------------------------------------\n");
   printf("testing for normalising polynomials\n");
   printf("--------------------------------------------------------------------------------\n");
-
-  //test1
   printf("Polynomial (A): ");
   printPolynomial(&a);
+  printf("Polynomial (C): ");
+  printPolynomial(&c);
+  
+  //test1
   printf("Noramlised (A) =  "); 
   normalise(&a, &normal);
   printPolynomial(&normal);
@@ -130,8 +132,6 @@ int main(){
   deletePolynomial(&normal);
 
   //test2  
-  printf("Polynomial (C): ");
-  printPolynomial(&c);
   printf("Noramlised (C) =  "); 
   normalise(&c, &normal);
   printPolynomial(&normal);
@@ -155,8 +155,6 @@ int main(){
   deletePolynomial(&a);
   deletePolynomial(&b);
   deletePolynomial(&c);
-
-
   
   return EXIT_SUCCESS;
 }
