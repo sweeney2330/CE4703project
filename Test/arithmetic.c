@@ -32,9 +32,9 @@ void add(polynomial *a, polynomial *b, polynomial *out){
 
 
   //loop through both polynomials, add each element
-  for(int i = 0; i <= size; i++){
+  for(int i = 0; i < size; i++){
     //check if each arrays are finished
-    if( i <= a->length && i <= b->length){
+    if( i < a->length && i < b->length){
 
       //store the sum of the current elements
       //in the new polynomial to be returned
@@ -67,9 +67,9 @@ void subtract(polynomial *a, polynomial *b, polynomial *out){
 
 
   //loop through both polynomials, subtract  each element
-  for(int i = 0; i <= size; i++){
+  for(int i = 0; i < size; i++){
     //check if each arrays are finished
-    if( i <= a->length && i <= b->length){
+    if( i < a->length && i < b->length){
 
       //store the sum of the current elements
       //in the new polynomial to be returned
@@ -101,7 +101,7 @@ void multiply(polynomial *a, double double_coeff, polynomial *out){
   int current_a;
   //loop through poly 'a' and each element 
   //multiplied by the double coeff
-  for(int i = 0; i <= a->length; i++){
+  for(int i = 0; i < a->length; i++){
     //store current value of poly coeff
     current_a = a->poly[i];
 
@@ -126,7 +126,7 @@ void divide(polynomial *a, double double_coeff, polynomial *out){
   int current_a;
   //loop through poly 'a' and each element 
   //diveded by the double coeff
-  for(int i = 0; i <= a->length; i++){
+  for(int i = 0; i < a->length; i++){
     //store current value of poly coeff
     current_a = a->poly[i];
 
@@ -152,7 +152,7 @@ void normalise(polynomial *a, polynomial *out){
   //find the max which will become the normalising coeff
   //loop will stop assigning values to the normal coeff
   //at higher orders if they are 0.
-  for(int i = 0; i <= a->length; i++){
+  for(int i = 0; i < a->length; i++){
     if(a->poly[i] != 0)
       norm = a->poly[i];
   }

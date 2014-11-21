@@ -35,13 +35,13 @@ void initialisePolynomial(polynomial *a, int size){
 
   //allocates memory for the  array and structure
   //stored to the pointer *poly in struct. 
-  a->poly = (double*)malloc(sizeof(polynomial) + size * (sizeof(double)) ); 
+  a->poly = (double*)malloc(size * (sizeof(double)) ); 
   
   //if memory allocation failed it would return in a NULL
   //this executes when memory allocation is a success      
   if (a->poly == NULL)
-    //not enough memory available so we free
-    free(a->poly);
+    //no need to do anything as memory was not allocated
+    ;//free(a->poly);
   else {
     // memory allocated successfully
     a->length = size;
