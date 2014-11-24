@@ -6,6 +6,15 @@
 //  ID: 13131567
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
+/*
+  Changelog
+  
+  24/11/14
+  -Added various error checks
+    1)Added error type for initialize polynomial
+    2)Added error return for delete polynomial
+    3)Added error check to printpolynomial
+ */
 
 /*
   Changelog
@@ -28,11 +37,11 @@
   @param polynomial *a the poly to be created
   @param int size will allow correct allocation of memory for array
 */
-void initialisePolynomial(polynomial *a, int size){
+pError initialisePolynomial(polynomial *a, int size){
   /* //the order of a polynomial when given an array is always */
   /* //n-1 where n is the size of the array. */
   /* int order = size - 1; */
-
+  pError p = ok; //default state for error detection
   //allocates memory for the  array and structure
   //stored to the pointer *poly in struct. 
   a->poly = (double*)malloc(size * (sizeof(double)) ); 
@@ -41,7 +50,7 @@ void initialisePolynomial(polynomial *a, int size){
   //this executes when memory allocation is a success      
   if (a->poly == NULL)
     //no need to do anything as memory was not allocated
-    ;//free(a->poly);
+    p = noMemory;//lets the user know that allocation was not sucessful
   else {
     // memory allocated successfully
     a->length = size;
@@ -52,7 +61,7 @@ void initialisePolynomial(polynomial *a, int size){
     }
   }
 
-  return;
+  return p;
 }
 
 /*
@@ -75,10 +84,13 @@ void addCoeff(polynomial *a, double coeff[]){
 
   @param polynomial *a the polynomial to be deleted
  */
-void deletePolynomial(polynomial *a){
-  free(a->poly);
-
-  return;
+pError deletePolynomial(polynomial *a){
+  pError p =ok; //Default state to say everything is ok
+  if(a->poly != NULL) //Checks if the polynomial is already empty
+    free(a->poly);
+  else
+    p = noData; //returns an error if the polynomial is already empty
+  return p;
 }
 
 
@@ -103,15 +115,19 @@ void checkSizes(polynomial *a){
 
   @param polynomial *a address of the polynomial to be printed
  */
-void printPolynomial(polynomial *a){
-  int max_index = a->length - 1;
-
-  for(int i = max_index; i >= 0; i--){
-    if(a->poly[i] >= 0){
-      printf("+");
+pError printPolynomial(polynomial *a){
+  pError p = ok;  
+  if(a->poly == NULL)
+    p=noData;
+  else
+    {
+      int max_index = a->length - 1;
+      
+      for(int i = max_index; i >= 0; i--){
+	if(a->poly[i] >= 0) printf("+");
+	printf("%.2lfx^%d ", a->poly[i], i);
+	printf("\n");
+      }
     }
-    printf("%.2lfx^%d ", a->poly[i], i);
-  }
-  printf("\n");
-  return;
+  return p;
 }
