@@ -6,6 +6,12 @@
 //  ID: 13131567
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
+/*
+  Changelog
+
+  24/11/14
+  1)Added enumeration type for pError, returns whether an operation was successful!
+ */
 
 /*
   Changelog
@@ -26,28 +32,21 @@ typedef struct{
   double *poly;
 }polynomial;
 
-//used in main.c and ui.c
-polynomial a, b;
- 
+typedef enum {ok,noMemory,noData} pError; //type to return whether an operation was a success
+
 //manipulate_manipulation.c declarations
-void add(polynomial *a, polynomial *b, polynomial *out);
-void subtract(polynomial *a, polynomial *b, polynomial *out);
-void multiply(polynomial *a, double double_coeff, polynomial *out);
-void divide(polynomial *a, double double_coeff, polynomial *out);
-void normalise(polynomial *a, polynomial *out);
+polynomial add(polynomial *a, polynomial *b);
+polynomial subtract(polynomial *a, polynomial *b);
+polynomial multiply(polynomial *a, double double_coeff);
+polynomial divide(polynomial *a, double double_coeff);
+polynomial normalise(polynomial *a);
 int order(polynomial *a);
 
 //create_delete_poly.c declarations
-void initialise(polynomial *a, int size);
-void createPolynomial(polynomial *a);
-void deletePolynomial(polynomial *a);
-void recreate(polynomial *a);
+pError createPolynomial(polynomial *a, int order,double data[]);
+pError addCoeff(polynomial *a, double coeff[]);
+pError deletePolynomial(polynomial *a);
 void checkSizes(polynomial *a);
-void printPolynomial(polynomial *a);
-
-//ui.c declarations
-void startScreen();
-void menu();
-void selection();
-
+pError printPolynomial(polynomial *a);
+void errorPrint(pError p);
 #endif
