@@ -1,6 +1,15 @@
 Changelog
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+24th of November 2014
 
+a) polynomial.c
+    	1) Added error type for initialize polynomial
+    	2) Added error return for delete polynomial
+    	3) Added error check to printpolynomial
 
+b) polynomial.h 
+	1) Added enumeration type for pError, returns whether an operation was successful!
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 21st of November 2014
 
 Discussed the file with Reiner in today's lab and found several issues
@@ -20,7 +29,7 @@ b) arithmetic.c
            move to hard coded tests it no longer applies. This also
 	   solved issues with deleting polynomials as it was going of
 	   range prior.
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 20th of November 2014
 
 Due to the removal of any scanf() in our main.c files a lot of changes had
