@@ -6,6 +6,18 @@
 //  ID: 13131567
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
+/*
+  Changelog
+  
+  24/11/14
+  -Added various error checks
+    1)Added error type for initialize polynomial
+    2)Added error return for delete polynomial
+    3)Added error check to printpolynomial
+    4)Added error check to printPolynomial
+  -Made initialise polynomial take in the data and add it
+  -Renamed initialisePolynomial to createPolynomial to reflect these changes
+ */
 
 /*
   Changelog
@@ -27,14 +39,33 @@
 
   @param polynomial *a the poly to be created
   @param int size will allow correct allocation of memory for array
- */
-void initialise(polynomial *a, int size){
-  //allocates memory for the struct as well as the size of the array
+*/
+pError createPolynomial(polynomial *a, int size,double data[]){
+  /* //the order of a polynomial when given an array is always */
+  /* //n-1 where n is the size of the array. */
+  /* int order = size - 1; */
+  pError p = ok; //default state for error detection
+  //allocates memory for the  array and structure
   //stored to the pointer *poly in struct. 
-  a->poly = (double*)malloc(sizeof(polynomial) + size*(sizeof(double))); 
-  a->length = size;
+  a->poly = (double*)malloc(size * (sizeof(double)) ); 
+  
+  //if memory allocation failed it would return in a NULL
+  //this executes when memory allocation is a success      
+  if (a->poly == NULL)
+    //no need to do anything as memory was not allocated
+    p = noMemory;//lets the user know that allocation was not sucessful
+  else {
+    // memory allocated successfully
+    a->length = size;
+    
+    //initialise array to be 0
+    for( int i = 0; i < a->length; i++){
+      a->poly[i] = 0;
+    }
+    addCoeff(a,data);
+  }
 
-  return;
+  return p;
 }
 
 /*
@@ -44,61 +75,34 @@ void initialise(polynomial *a, int size){
  
   @return a the polynomial created
 */
-void createPolynomial(polynomial *a){
-  int n;
-  printf("Enter the order of the polynomial ");
-  
-  scanf("%d", &n);
-
-  //initialised with abs(n) to turn negative inputs to positive
-  initialise(a, abs(n));
-
-  //size checks
-  checkSizes(a);
-
-  printf("Enter your coeffs:\n");
-  //if memory allocation failed it would return in a NULL
-  //this executes when memory allocation is a success
-  if(a->poly != NULL){
-    //build the array
-    for(int i = 0; i <= abs(n); i++){
-      //takes in the input as the coeff to be added to the array
-      //the +i is there to move our pointer to the next 'double' block
-      //which was allocated with malloc
-      printf("x^[%d]: ", i);
-      scanf("%lf", a->poly+i);
-
+pError addCoeff(polynomial *a, double coeff[]){
+  //build the array
+  pError p = ok; //Defaul state that the function is working
+  if(a->poly == NULL) //check for an empty polynomial
+    p = noData; //returns error for an empty polynomial
+  else
+    {
+      for(int i = 0; i < a->length; i++){
+	a->poly[i] = coeff[i];  
+      }
     }
-  }
-
-  return;
+   return p;
 }
-
 /*
   delete the polynomial by accessing the address memory of the polynomials
   and returning it to void
 
   @param polynomial *a the polynomial to be deleted
  */
-void deletePolynomial(polynomial *a){
-  free(a->poly);
-
-  return;
+pError deletePolynomial(polynomial *a){
+  pError p =ok; //Default state to say everything is ok
+  if(a->poly != NULL) //Checks if the polynomial is already empty
+    free(a->poly);
+  else
+    p = noData; //returns an error if the polynomial is already empty
+  return p;
 }
 
-/*
-  Recreate the polynomial. Can you realloc to change memory to fit the new bill.
-  More sense to just delete the previous array and give new memory
-  
-  @param polynomial *a address of the polynomial to be modified
- */
-void recreate(polynomial *a){
-  //is this cheating? this is probably cheating.
-  deletePolynomial(a);
-  createPolynomial(a);
-  
-  return;
-}
 
 /*
   Displays the all information of the polynomial
@@ -121,11 +125,32 @@ void checkSizes(polynomial *a){
 
   @param polynomial *a address of the polynomial to be printed
  */
-void printPolynomial(polynomial *a){
-  for(int i = 0; i <= a->length; i++){
-    printf("%.2lfx^%d ", a->poly[i], i);
-  }
-  printf("\n");
-  
-  return;
+pError printPolynomial(polynomial *a){
+  pError p = ok;  
+  if(a->poly == NULL)
+    p=noData;
+  else
+    {
+      int max_index = a->length - 1;
+      
+      for(int i = max_index; i >= 0; i--){
+	if(a->poly[i] >= 0) printf("+");
+	printf("%.2lfx^%d ", a->poly[i], i);
+	printf("\n");
+      }
+    }
+  return p;
+}
+/*
+  This function is used to tell the user if an error has occured
+  @param pError p error variable being checked
+ */
+void errorPrint(pError p)
+{
+  if(p == ok)
+    printf("Everything is ok\n");
+  else if (p==noData)
+    printf("Error: There was a pointer to a NULL polynomial\n");
+  else if(p==noMemory)
+    printf("Error: Polynomial could not be created\n");
 }

@@ -17,6 +17,11 @@
 #include "polynomial.h"
 
 /*
+  Changelog
+  24/11/14
+  -Changed arithmetic functions to use new create polynomial function
+ */
+/*
   Add two polynomials. All assignments are done by pass by reference.
 
   @param polynomial *a address of the first polynomial
@@ -24,32 +29,30 @@
   @param polynomial *out address of the resultant polynomial
 
  */
-void add(polynomial *a, polynomial *b, polynomial *out){
+polynomial add(polynomial *a, polynomial *b){
   //initialise array with proper allocated memory
   //macro found in header, finds the two max
   int size = MAX(a->length, b->length);
-  initialise(out, size);
-
-
+  double data[size];
+  polynomial out;
   //loop through both polynomials, add each element
-  for(int i = 0; i <= size; i++){
+  for(int i = 0; i < size; i++){
     //check if each arrays are finished
-    if( i <= a->length && i <= b->length){
-
+    if( i < a->length && i < b->length){
       //store the sum of the current elements
       //in the new polynomial to be returned
-      out->poly[i] = a->poly[i] + b->poly[i];
+      data[i] = a->poly[i] + b->poly[i];
     }else{
       //throw in whatever's left if one of the arrays are exhausted
       if( a->length > b->length){
-	out->poly[i] = a->poly[i];
+	data[i] = a->poly[i];
       }else{
-	out->poly[i] = b->poly[i];
+	data[i] = b->poly[i];
       }
     }
   }
-
-  return;
+  createPolynomial(&out,size,data);
+  return out;
 }
 
 /*
@@ -57,34 +60,34 @@ void add(polynomial *a, polynomial *b, polynomial *out){
  
   @param polynomial *a address of the first polynomial
   @param polynomial *b address of the second  polynomial
-  @param polynomial *out address of the resultant polynomial
+  @result returns the resulting polynomial
 
  */
-void subtract(polynomial *a, polynomial *b, polynomial *out){
+polynomial subtract(polynomial *a, polynomial *b){
   //initialise array with proper allocated memory
   int size = MAX(a->length, b->length);
-  initialise(out, size);
-
+  polynomial out;
+  double data[size];
 
   //loop through both polynomials, subtract  each element
-  for(int i = 0; i <= size; i++){
+  for(int i = 0; i < size; i++){
     //check if each arrays are finished
-    if( i <= a->length && i <= b->length){
+    if( i < a->length && i < b->length){
 
       //store the sum of the current elements
       //in the new polynomial to be returned
-      out->poly[i] = a->poly[i] - b->poly[i];
+      data[i] = a->poly[i] - b->poly[i];
     }else{
       //throw in whatever's left if one of the arrays are exhausted
       if( a->length > b->length){
-	out->poly[i] = a->poly[i];
+	data[i] = a->poly[i];
       }else{
-	out->poly[i] = b->poly[i];
+	data[i] = b->poly[i];
       }
     }
   }
-
-  return;
+  createPolynomial(&out,size,data);
+  return out;
 }
 
 /*
@@ -92,24 +95,23 @@ void subtract(polynomial *a, polynomial *b, polynomial *out){
  
   @param polynomial *a address of the polynomial
   @param double double_coeff used to multiply the polynomial
-  @param polynomial *out address of the resultant polynomial
+  @returns the resulting polynomial value
  */
-void multiply(polynomial *a, double double_coeff, polynomial *out){
+polynomial multiply(polynomial *a, double double_coeff){
   //initialize poly array with correct memory allocation
-  initialise(out, a->length);
-
+  double data[a->length];
   int current_a;
+  polynomial out;
   //loop through poly 'a' and each element 
   //multiplied by the double coeff
-  for(int i = 0; i <= a->length; i++){
+  for(int i = 0; i < a->length; i++){
     //store current value of poly coeff
     current_a = a->poly[i];
-
     //at each iteration store the evaluation to result
-    out->poly[i] = (current_a)*(double_coeff);
+    data[i] = (current_a)*(double_coeff);
   }
-  
-  return;
+  createPolynomial(&out,a->length,data);
+  return out;
 }
 
 /*
@@ -117,25 +119,25 @@ void multiply(polynomial *a, double double_coeff, polynomial *out){
 
   @param polynomial *a address of the polynomial 'a'
   @param double_coeff used to divide the polynomial
-  @param polynomial *out address of the resultant polynomial
+  @result is a polynomial
  */
-void divide(polynomial *a, double double_coeff, polynomial *out){
+polynomial divide(polynomial *a, double double_coeff){
   //initialize poly array with correct memory allocation
-  initialise(out, a->length);
-
+  polynomial out;
+  double data[a->length];
   int current_a;
   //loop through poly 'a' and each element 
   //diveded by the double coeff
-  for(int i = 0; i <= a->length; i++){
+  for(int i = 0; i < a->length; i++){
     //store current value of poly coeff
     current_a = a->poly[i];
 
     //at each iteration store the evaluation to the 
     //corresponding address for the poly array
-    out->poly[i] = (current_a)/(double_coeff);
+    data[i] = (current_a)/(double_coeff);
   }
-  
-  return;
+  createPolynomial(&out,a->length,data);
+  return out;
 }
 
 /*
@@ -144,21 +146,22 @@ void divide(polynomial *a, double double_coeff, polynomial *out){
   @param polynomial *a the address of the polynomial
   @param polynomial *out the address of the resultant polynomial
  */
-void normalise(polynomial *a, polynomial *out){
-  initialise(out, a->length);
-
-  //set the max before hand to compare
-  int max = a->poly[0];  
-  
+polynomial normalise(polynomial *a){
+  double norm;
+  polynomial out;
+  //find highest order with a valid coeff
   //find the max which will become the normalising coeff
-  for(int i = 1; i <= a->length; i++){
-    max = MAX(max, a->poly[i]);
+  //loop will stop assigning values to the normal coeff
+  //at higher orders if they are 0.
+  for(int i = 0; i < a->length; i++){
+    if(a->poly[i] != 0)
+      norm = a->poly[i];
   }
 
   //use divide function from before :)
-  divide(a, max, out);
+  out = divide(a, norm);
 
-  return;
+  return out;
 }
 
 
@@ -169,5 +172,7 @@ void normalise(polynomial *a, polynomial *out){
   @return the order of the polynomial
 */
 int order(polynomial *a){
-  return a->length;
+  //length stores the length of the array rather than order so
+  //we subtract one to give the right answer
+  return a->length - 1; 
 }
