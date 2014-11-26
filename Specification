@@ -1,0 +1,58 @@
+ADT – Polynomials
+          Group 3: Raj Shah, Trevor McSweeney, Gearoid Cremin, Ian Lodovica 
+
+SPECIFICATIONS
+createPolynomial(polynomial a, size, data): create a new polynomial when given the coefficients as well as the size of the input array. Uses dynamic arrays.
+Precondition: polynomial must be empty, data is valid and the size matches the size of the data inputted.
+Postcondition: if resources are available, the created polynomial is returned with the size and coefficient specified.
+ 
+deletePolynomial(polynomial): deletes a polynomial.
+Precondition: polynomial must have been previously allocated memory by malloc().
+Postcondition: frees the memory that was allocated to the polynomial, effectively deleting the polynomial.
+ 
+add(polynomial a, polynomial b, polynomial out): adds the two polynomials and the sum is stored in the polynomial out.
+Precondition: polynomials a and b must be valid polynomials.
+Postcondition: the sum of the two polynomials is sent to polynomial out.
+ 
+subtract(polynomial a, polynomial b, polynomial out):  subtracts two polynomials and stores the difference in polynomial out.
+Precondtion: polynomials a and b must be valid polynomials.
+Postcondition:  the difference of the two polynomials is sent to polynomial out.
+ 
+multiply(polynomial a, coefficient,  polynomial out): multiplies the polynomial by the coefficient stores the result in polynomial out.
+Precondition: polynomial a must be a valid polynomial, coefficient is a double.
+Postcondition: the polynomial is multiplied by the coefficient and the resultant polynomial is sent to polynomial out.
+ 
+
+
+divide(polynomial a, coefficient,  polynomial out): divides the polynomial by the coefficient stores the result in polynomial out.
+Precondition: polynomial a must be a valid polynomial, coefficient is a double and not a zero.
+Postcondition: the polynomial is divided by the coefficient and the resultant polynomial is sent to polynomial out.
+
+normalise(polynomial a, polynomial out): normalises polynomial a by finding the highest order with a coefficient and dividing the polynomial with it.
+Preconditions: polynomial a must be a valid polynomial.
+Postcondition: the polynomial will be divided by the normalising coefficient and the resultant polynomial is sent to polynomial out.
+ 
+getOrder(polynomial, order): finds the order of the polynomial by accessing the data structure for a polynomial.
+Precondition: the polynomial is valid.
+Postcondition: sends the order of the polynomial to var order.
+ 
+printPolynomial(polynomial): prints the polynomial in descending order.
+Precondition: the polynomial is valid.
+Postcondition: prints out the polynomial skipping a line once finished.
+ 
+Function Prototypes
+Creating/deleting polynomials.
+pError createPolynomial(int size, double coeff[])
+pError deletePolynomial(polynomial *a)
+ 
+Printing polynomials.
+pError printPolynomial(polynomial *a)
+ 
+Arithmetic operations.
+pError add(polynomial *a, polynomial *b, polynomial *out)
+pError subtract(polynomial *a, polynomial *b, polynomial *out)
+pError multiply(polynomial *a, double double_coeff, polynomial *out)
+pError divide(polynomial *a, double double_coeff, polynomial *out)
+pError normalise(polynomial *a, polynomial *out)
+pError getOrder(polynomial *a, int *order)
+
