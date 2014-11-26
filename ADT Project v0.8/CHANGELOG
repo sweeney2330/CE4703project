@@ -1,0 +1,144 @@
+/////////////////////////////////////////////////////////////////////////////////
+//  File: CHANGELOG
+//  Desc: Keeps everyone updated on the changes happening to the file.
+//
+//  Author: Group 3
+//  ID: 13131567 13133799 13153889 13104195
+//  Date: 14/11/14
+///////////////////////////////////////////////////////////////////////////////// 
+
+*************
+* CHANGELOG *
+*************
+	
+/////////////////////////////////////////////////////////////////////////////////////////////
+//26th of November 2014 (b)
+/////////////////////////////////////////////////////////////////////////////////////////////
+Testing how unprocessed polynomials reacted to the code and essentially
+crashed it. Checking if a polynomial was NULL wasn't enough as when
+uninitialised it can have garbage values which is most definitely not
+equal to NULL. This showed the need to have a flag inside each polynomial
+to determine whether it's valid or not. This flag is set to TRUE upon
+successful creation and FALSE on deletion.
+
+a) polynomial.h
+	1) struct now contains a flag for the polynomial with enum type 'flag'.
+	2) seperated error types in arithmetic and printing to have
+	   distinct error messages.
+
+b) arithmetic.c
+	1) verify() is now called at the end of each function to check if
+	   the operation was a success or not. This is more of a hidden
+	   method now.
+	2) all checks which were previously 'if(a->poly != NULL) have been
+	   replaced with 'if(a->valid == TRUE)'
+	3) getOrder now returns an int to simplify things.
+	
+c) main.c
+	1) removed all verify() calls as they are not needed by the user
+	   anymore, only the authors.
+
+misc: Updated the comments for all files to match the current version.
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//26th of November 2014 (a)
+/////////////////////////////////////////////////////////////////////////////////////////////
+Now makes use of the error returns of functions. To check if a function is
+operating normally, simply wrap a function that returns an error type with verify().
+	
+a) polynomial.c
+	modified: pError deletePolynomial(polynomial *a)
+	1) returns void again
+	2) now assigns NULL to the freed pointer
+
+	modified: pError createPolynomial(polynomial*a, int size, doublecoeff[])
+	1) returns void again
+
+	added: void verify(pError type)
+	1) uses switch/case statement to detect which type of error is
+	   passed and displays the error accordingly.
+	
+/////////////////////////////////////////////////////////////////////////////////////////////
+//25th of November 2014
+/////////////////////////////////////////////////////////////////////////////////////////////
+Every function now returns an error type. These are: ok, noMemory and illegalPoly.
+All functions begin at status = ok, illegalPoly kicks in if
+the memory located for the dynamic array is null, which prevents
+any operations from being processed. 
+
+a) polynomial.c
+	modified: void initialisePolynomial() 
+	modified: void addCoeff()
+	1) these two functions have been merged to one with the name
+	   pError createPolynomial(polynomial *a, int size, double coeff[]).
+
+b) arithmetic.c
+	As we no longer have an initialisePolynomial() most functions now
+	contain and array for data which will be used as inputs when
+	creating the resultant array.
+
+	modified: void order(polynomial *a)
+	1) Renamed to pError getOrder(polynomial *a, int *order). This
+	also now takes an int pointer to give the ability to return an error.
+	
+c) polynomial.h
+	1) Now contains enum for all error types.
+	2) function declarations have been modified to match the new changes.
+	
+/////////////////////////////////////////////////////////////////////////////////////////////
+//21st of November 2014
+/////////////////////////////////////////////////////////////////////////////////////////////
+Discussed the file with Reiner in today's lab and found several issues
+with indexing, however the process in which the polynomials are being
+tested is correct. Base application is essentially finished, only require
+'interesting' test cases currently.
+
+a) polynomial.c
+	modified: void initialisePolynomial(polynomial *a, int size)
+	1) Reiner pointed out if malloc does indeed return NULL, there is
+	   no need to free it. Hence it doesn't free anymore.
+	2) Corrected how memory is allocated to the array.
+
+b) arithmetic.c
+	1) All <= operators have now been reduced to <. It was previously
+	   designed to match the user input for order however since our
+           move to hard coded tests it no longer applies. This also
+	   solved issues with deleting polynomials as it was going of
+	   range prior.
+	
+/////////////////////////////////////////////////////////////////////////////////////////////	
+//20th of November 2014
+/////////////////////////////////////////////////////////////////////////////////////////////
+Due to the removal of any scanf() in our main.c files a lot of changes had
+to be made. Particularly to the way we create a dynamic array and how we
+add coefficients.
+
+a) polynomial.c
+	modified: void initialise(polynomial *a, int size)
+	1) Renamed to void initialisePolynomial(polynomial *a, int size)
+	2) NULL check has been moved into the function
+	3) Frees the polynomial under failure, initialises polynomial to 0 otherwise
+	
+	modified: void createPolynomial(polynomial *a)
+	1) Renamed to addCoeff(polynomial *a, double coeff[])
+	2) Now takes an array of values to become the coefficients of the polynomial
+	
+	modified: void printPolynomial(polynomial *a)
+	1) Now adds a '+' sign when applicable
+	2) Prints the polynomial with the highest degree first
+	
+b) polynomial.h
+	1) Made adjustments to function declarations where needed.
+	
+c) main.c
+	Description: This file is used to test every single function with given
+	static arrays which will be the coefficients of our polynomials.
+
+	Feel free to try your own test cases so we can discover bugs
+	and remidy them. However, make sure every time you allocate memory
+	that you free is later. Especially if you plan on re-using
+	that polynomial.
+	
+	I've made it to be fairly intuitive to change things as well but
+	ask me if there's anything wrong or a better way of doing it.
+				 
