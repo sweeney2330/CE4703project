@@ -9,7 +9,7 @@
 //        6) Order
 //
 //  Author: Group 3
-//  ID: 13131567
+//  ID: 13131567 13133799 13153889 13104195
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
 #include <stdio.h>
@@ -62,6 +62,9 @@ pError add(polynomial *a, polynomial *b, polynomial *out){
   @param polynomial *a address of the first polynomial
   @param polynomial *b address of the second  polynomial
   @param polynomial *out address of the resultant polynomial
+
+  @return status is ok if everything went fine else returns illegalPoly if one of
+          the polynomials are invalid.
 
  */
 pError subtract(polynomial *a, polynomial *b, polynomial *out){

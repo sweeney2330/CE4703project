@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////////////
+//  File: main.c
+//  Desc: main file to run the program and initiate test cases
+//   
+//  Author: Group 3
+//  ID: 13131567 13133799 13153889 13104195
+//  Date: 24/11/14
+///////////////////////////////////////////////////////////////////////////////// 
+
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -154,7 +164,7 @@ int main(){
   deletePolynomial(&a);
   deletePolynomial(&b);
   deletePolynomial(&c);
-  
+
   return EXIT_SUCCESS;
 }
 

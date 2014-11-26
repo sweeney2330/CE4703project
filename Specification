@@ -1,5 +1,5 @@
 ADT – Polynomials
-          Group 3: Raj Shah, Trevor McSweeney, Gearoid Cremin, Ian Lodovica 
+          Group 3: Raj Shah(13104195), Trevor McSweeney(13133799), Gearoid Cremin(13153889), Ian Lodovica(13131567) 
 
 SPECIFICATIONS
 createPolynomial(polynomial a, size, data): create a new polynomial when given the coefficients as well as the size of the input array. Uses dynamic arrays.
@@ -39,6 +39,10 @@ Postcondition: sends the order of the polynomial to var order.
 printPolynomial(polynomial): prints the polynomial in descending order.
 Precondition: the polynomial is valid.
 Postcondition: prints out the polynomial skipping a line once finished.
+
+verify(Error type): checks if polymonial is valid after creation.
+Precondition: enumerator for error type.
+Postcondition: if it dectects an error it prints the appropriate error type.
  
 Function Prototypes
 Creating/deleting polynomials.

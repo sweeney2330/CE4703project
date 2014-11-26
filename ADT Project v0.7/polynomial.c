@@ -3,7 +3,7 @@
 //  Desc: controls everything that happens to the polynomials at a memory level
 //   
 //  Author: Group 3
-//  ID: 13131567
+//  ID: 13131567 13133799 13153889 13104195
 //  Date: 14/11/14
 ///////////////////////////////////////////////////////////////////////////////// 
 
@@ -114,13 +114,13 @@ void verify(pError type){
     //no need to do anything it's all good.
     break;
   case illegalPoly:
-    printf("Illegal Polynomial\n");
+    printf("Error: Illegal Polynomial\n");
     break;
   case noMemory:
-    printf("Insufficient memory to allocate data\n");
+    printf("Error: Insufficient memory to allocate data\n");
     break;
   default:
-    printf("Something went wrong\n");
+    printf("Error: Something went wrong\n");
     break;
   }  
 }
