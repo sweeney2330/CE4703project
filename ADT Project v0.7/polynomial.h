@@ -21,6 +21,7 @@
 
 #define MAX(a, b) ((a)>=(b)?(a):(b))
 
+
 typedef struct{
   int length;
   double *poly;
@@ -37,9 +38,10 @@ pError normalise(polynomial *a, polynomial *out);
 pError getOrder(polynomial *a, int *order);
 
 //create_delete_poly.c declarationsy
-pError createPolynomial(polynomial *a, int size, double coeff[]);
-pError deletePolynomial(polynomial *a);
-void checkSizes(polynomial *a);
+void createPolynomial(polynomial *a, int size, double coeff[]);
+void deletePolynomial(polynomial *a);
+pError checkSizes(polynomial *a);
 pError printPolynomial(polynomial *a);
+void verify(pError type);
 
 #endif

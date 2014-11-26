@@ -1,6 +1,26 @@
 Changelog
-25th of November 2014
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+//26th of November 2014
+/////////////////////////////////////////////////////////////////////////////////////////////
+Now makes use of the error returns of functions. To check if a function is
+operating normally, simply wrap a function that returns an error type with verify().
+	
+a) polynomial.c
+	modified: pError deletePolynomial(polynomial *a)
+	1) returns void again
+	2) now assigns NULL to the freed pointer
+
+	modified: pError createPolynomial(polynomial*a, int size, doublecoeff[])
+	1) returns void again
+
+	added: void verify(pError type)
+	1) uses switch/case statement to detect which type of error is
+	   passed and displays the error accordingly.
+	
+/////////////////////////////////////////////////////////////////////////////////////////////
+//25th of November 2014
+/////////////////////////////////////////////////////////////////////////////////////////////
 Every function now returns an error type. These are: ok, noMemory and illegalPoly.
 All functions begin at status = ok, illegalPoly kicks in if
 the memory located for the dynamic array is null, which prevents
@@ -10,7 +30,7 @@ a) polynomial.c
 	modified: void initialisePolynomial() 
 	modified: void addCoeff()
 	1) these two functions have been merged to one with the name
-	   pError createPolynomial(polynomial *a, int size, doublecoeff[]).
+	   pError createPolynomial(polynomial *a, int size, double coeff[]).
 
 b) arithmetic.c
 	As we no longer have an initialisePolynomial() most functions now
@@ -25,9 +45,9 @@ c) polynomial.h
 	1) Now contains enum for all error types.
 	2) function declarations have been modified to match the new changes.
 	
-
-21st of November 2014
-
+/////////////////////////////////////////////////////////////////////////////////////////////
+//21st of November 2014
+/////////////////////////////////////////////////////////////////////////////////////////////
 Discussed the file with Reiner in today's lab and found several issues
 with indexing, however the process in which the polynomials are being
 tested is correct. Base application is essentially finished, only require
@@ -46,8 +66,9 @@ b) arithmetic.c
 	   solved issues with deleting polynomials as it was going of
 	   range prior.
 	
-20th of November 2014
-
+/////////////////////////////////////////////////////////////////////////////////////////////	
+//20th of November 2014
+/////////////////////////////////////////////////////////////////////////////////////////////
 Due to the removal of any scanf() in our main.c files a lot of changes had
 to be made. Particularly to the way we create a dynamic array and how we
 add coefficients.

@@ -10,7 +10,8 @@ int main(){
 
   //these will be converted into dynamic arrays later on.
   //they just store the coeffs to be used for the polynomials.
-  double data1[3] =  {-204, 2, 340};
+  double data1[3];
+  data1[2] = 5;
   double data2[3] = {5.2, -2, 4};
   double data3[7]= {5.0, 2.0, 20, 0, 5, 2, 40.2};
 
@@ -32,11 +33,11 @@ int main(){
   printf("These are the starting polynomials which will be used for the later operations\n");
   printf("--------------------------------------------------------------------------------\n");
   printf("Polynomial (A): ");
-  printPolynomial(&a);
+  verify(printPolynomial(&a));
   printf("Polynomial (B): ");
-  printPolynomial(&b);
+  verify(printPolynomial(&b));
   printf("Polynomial (C): ");
-  printPolynomial(&c);
+  verify(printPolynomial(&c));
 
   //////////////////////////////////////////////////////////////////
   //testing add/subtract polynomials of same length
@@ -45,19 +46,19 @@ int main(){
   printf("testing add/subtract polynomials of same length\n");
   printf("--------------------------------------------------------------------------------\n");
   printf("Polynomial (A): ");
-  printPolynomial(&a);
+  verify(printPolynomial(&a));
   printf("Polynomial (B): ");
-  printPolynomial(&b);
+  verify(printPolynomial(&b));
 
   //add
   printf("A + B =  ");
-  add(&a, &b, &sum);
-  printPolynomial(&sum);
+  verify(add(&a, &b, &sum));
+  verify(printPolynomial(&sum));
 
   //subtract
   printf("A - B =  ");
-  subtract(&a, &b, &difference);
-  printPolynomial(&difference);
+  verify(subtract(&a, &b, &difference));
+  verify(printPolynomial(&difference));
 
   deletePolynomial(&sum);
   deletePolynomial(&difference);
@@ -69,18 +70,18 @@ int main(){
   printf("testing add/subtract polynomials of different length\n");
   printf("--------------------------------------------------------------------------------\n");
   printf("Polynomial (A): ");
-  printPolynomial(&a);
+  verify(printPolynomial(&a));
 
   printf("Polynomial (C): ");
-  printPolynomial(&c);
+  verify(printPolynomial(&c));
 
   printf("A + C =  ");
-  add(&a, &c, &sum);
-  printPolynomial(&sum);
+  verify(add(&a, &c, &sum));
+  verify(printPolynomial(&sum));
 
   printf("A - C =  ");
-  subtract(&a, &c, &difference);
-  printPolynomial(&difference);
+  verify(subtract(&a, &c, &difference));
+  verify(printPolynomial(&difference));
 
   deletePolynomial(&sum);
   deletePolynomial(&difference);
