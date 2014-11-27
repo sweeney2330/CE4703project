@@ -222,8 +222,14 @@ int getOrder(polynomial *a){
   if( a->valid == TRUE ){
     //length stores the length of the array rather than order so
     //we subtract one to give the right answer
-    return a->length -1;
-  } 
-
-  return 0;  
+    int max_order = a->length - 1 ;
+    
+    //start from the highest perceived order and work backwards until it finds
+    //a non-zero coeff which will become the highest order.
+    while(a->coeff[max_order] == 0){
+      max_order--;
+    }
+    return max_order;
+  }  
+  return 0; //returns a default of 0 for the order  
 }

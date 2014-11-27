@@ -27,6 +27,7 @@ void verify(pError type);
 */
 void createPolynomial(polynomial *a, int size, double coeff[]){
   pError status = ok;
+
   //calloc used as it automatically initialises the unassign memory locations to 0.
   //especially useful when using a dynamic array.
   a->coeff = (double*)calloc(size , (sizeof(double))); 
@@ -130,8 +131,8 @@ void verify(pError type){
   case noMemory: //comes from createPolynomial(). only happens when using potatoes.
     printf("Warning: Insufficient memory to allocate data.\n");
     break;
-  default: //for when the user tries modifies the error list. please don't.
-    printf("Error: Something horribly went wrong.\n");
+  default: //for when the user tries modifies the error list. please don't....... CIAN.
+    printf("Error: Something went horribly wrong.\n"); 
     break;
   }  
 }
