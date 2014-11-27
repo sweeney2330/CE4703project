@@ -23,7 +23,7 @@ typedef struct{
   int length; //size of the polynomial. note this is not the order
   flag valid; //flag which determines whether the polynomial is valid or not
   double *coeff; //this stores the coefficients of the polynomial
-}polynomial
+}polynomial;
 
 //manipulate_manipulation.c declarations
 pError add(polynomial *a, polynomial *b, polynomial *out);
