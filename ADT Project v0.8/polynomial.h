@@ -13,7 +13,7 @@
 #define MAX(a, b) ((a)>=(b)?(a):(b))
 
 //used to detect if polynomial is valid or not
-typedef enum {TRUE, FALSE} flag;
+typedef enum {FALSE, TRUE} flag;
 
 //used to detect if any errors occured. 
 typedef enum {ok, noMemory, illegalDelete, illegalPoly_math, illegalPoly_print} pError;
