@@ -55,7 +55,10 @@ pError add(polynomial *a, polynomial *b, polynomial *out){
     }
     createPolynomial(out, size, data); //creates the polynomial
 
-  } else status = illegalPoly_math; //one of the poly returned NULL so we flag it.
+  } else  {
+    status = illegalPoly_math; //poly is invalid, return error
+    out->valid = FALSE;
+  }
 
   verify(status); //checks if any errors need to be printed.
   return status;
