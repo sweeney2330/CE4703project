@@ -12,7 +12,13 @@
 #include "polynomial.h"
 
 int main(){ 
-  polynomial a, b, c, sum, difference, product, quotient, normal;
+  //test cases
+  polynomial a, b, c, d; 
+  
+  //result of arithmetic operations
+  polynomial sum, difference, product, quotient, normal;
+  
+  //used as dividing/multiplying factor in later polynomials
   double coeff;
 
   //these will be converted into dynamic arrays later on.
@@ -44,6 +50,8 @@ int main(){
   printPolynomial(&b);
   printf("Polynomial (C): ");
   printPolynomial(&c);
+  printf("Polynomial (D) [invalid]: ");
+  printPolynomial(&d);
 
   //////////////////////////////////////////////////////////////////
   //testing add/subtract polynomials of same length
@@ -96,6 +104,31 @@ int main(){
   deletePolynomial(&difference);
 
   //////////////////////////////////////////////////////////////////
+  //testing add/subtract with invalid polynomials  
+  //////////////////////////////////////////////////////////////////
+  printf("--------------------------------------------------------------------------------\n");
+  printf("testing add/subtract with invalid polynomials\n");
+  printf("--------------------------------------------------------------------------------\n");
+  printf("Polynomial (A): ");
+  printPolynomial(&a);
+
+  printf("Polynomial (D): ");
+  printPolynomial(&d);
+
+  printf("A + D =  ");
+  add(&a, &d, &sum);
+  printPolynomial(&sum);
+
+  printf("A - D =  ");
+  subtract(&a, &d, &difference);
+  printPolynomial(&difference);
+
+  //these polynomials were never created as the above operations return an error
+  //this will cause deletePolynomial to give a warning to the user.
+  deletePolynomial(&sum);
+  deletePolynomial(&difference);
+
+  //////////////////////////////////////////////////////////////////
   //testing multiplcation/division by a scalar  
   //////////////////////////////////////////////////////////////////
   printf("--------------------------------------------------------------------------------\n");
@@ -120,7 +153,32 @@ int main(){
 
   deletePolynomial(&product);
   deletePolynomial(&quotient);
+  //////////////////////////////////////////////////////////////////
+  //testing multiplcation/division with invalid polynomials  
+  //////////////////////////////////////////////////////////////////
+  printf("--------------------------------------------------------------------------------\n");
+  printf("testing multiplcation/division by a scalar with invalid polynomials\n");
+  printf("--------------------------------------------------------------------------------\n");
+  printf("Polynomial (A): ");
+  printPolynomial(&a);
+  printf("Polynomial (D): ");
+  printPolynomial(&d);
 
+  coeff = 5;
+
+  //multiply
+  printf("A * %.2lf =  ", coeff);
+  multiply(&a, coeff, &product);
+  printPolynomial(&product);
+
+  //divide
+  printf("D / %.2lf =  ", coeff);
+  divide(&d, coeff, &quotient);
+  printPolynomial(&quotient);
+
+  deletePolynomial(&product);
+  deletePolynomial(&quotient); //quotient delete should return an error as it was never created
+  
   //////////////////////////////////////////////////////////////////
   //testing for normalising polynomials
   //////////////////////////////////////////////////////////////////
@@ -145,7 +203,32 @@ int main(){
   printPolynomial(&normal);
 
   deletePolynomial(&normal);
+  
+  //////////////////////////////////////////////////////////////////
+  //testing for normalising polys with invalid polynomials
+  //////////////////////////////////////////////////////////////////
+  printf("--------------------------------------------------------------------------------\n");
+  printf("testing for normalising polynomials with an invalid polynomials\n");
+  printf("--------------------------------------------------------------------------------\n");
+  printf("Polynomial (A): ");
+  printPolynomial(&a);
+  printf("Polynomial (D): ");
+  printPolynomial(&d);
+  
+  //test1
+  printf("Noramlised (A) =  "); 
+  normalise(&a, &normal);
+  printPolynomial(&normal);
 
+  deletePolynomial(&normal);
+
+  //test2  
+  printf("Noramlised (D) =  "); 
+  normalise(&d, &normal);
+  printPolynomial(&normal);
+
+  deletePolynomial(&normal); //will return a warning
+    
   //////////////////////////////////////////////////////////////////
   //testing for order of poly
   //////////////////////////////////////////////////////////////////
@@ -155,6 +238,7 @@ int main(){
   printf("Polynomial (A): ");
   printPolynomial(&a);
   printf("Order: %d\n", getOrder(&a)); 
+ 
  
   //////////////////////////////////////////////////////////////////
   //delete original polynomials
