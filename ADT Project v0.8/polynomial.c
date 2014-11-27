@@ -59,7 +59,7 @@ void createPolynomial(polynomial *a, int size, double coeff[]){
   set back to 'initial' values.
 
   @param polynomial *a the polynomial to be deleted
- */
+*/
 void deletePolynomial(polynomial *a){
   pError status = ok;
 
@@ -82,8 +82,8 @@ void deletePolynomial(polynomial *a){
   @param polynomial *a address of the polynomial to be printed
 
   @return prints out an error message if polynomial is invalid, else prints out
-          the polynomial with the highest degree first.
- */
+  the polynomial with the highest degree first.
+*/
 pError printPolynomial(polynomial *a){
   pError status = ok;
 
@@ -111,7 +111,7 @@ pError printPolynomial(polynomial *a){
   error message to print out using a switch/case statement.
 
   @param pError type the type of error passed. the list is defined in the header file.
- */
+*/
 void verify(pError type){
   switch(type){
   

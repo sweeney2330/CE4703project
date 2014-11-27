@@ -28,8 +28,8 @@ void verify(pError type);
   @param polynomial *out address of the resultant polynomial
 
   @return status is ok if everything went fine else returns illegalPoly_math if one of
-          the polynomials are invalid.
- */
+  the polynomials are invalid.
+*/
 pError add(polynomial *a, polynomial *b, polynomial *out){
   pError status = ok;
   
@@ -54,12 +54,10 @@ pError add(polynomial *a, polynomial *b, polynomial *out){
       }
     }
     createPolynomial(out, size, data); //creates the polynomial
-
   } else  {
     status = illegalPoly_math; //poly is invalid, return error
     out->valid = FALSE;
   }
-
   verify(status); //checks if any errors need to be printed.
   return status;
 }
@@ -74,9 +72,9 @@ pError add(polynomial *a, polynomial *b, polynomial *out){
   @param polynomial *out address of the resultant polynomial
 
   @return status is ok if everything went fine else returns illegalPoly_math if one of
-          the polynomials are invalid.
+  the polynomials are invalid.
 
- */
+*/
 pError subtract(polynomial *a, polynomial *b, polynomial *out){
   pError status = ok;
    
@@ -106,6 +104,7 @@ pError subtract(polynomial *a, polynomial *b, polynomial *out){
     status = illegalPoly_math; //poly is invalid, return error
     out->valid = FALSE;
   }
+
   verify(status); //check if any errors need to be printed
   return status;
 }
@@ -118,7 +117,7 @@ pError subtract(polynomial *a, polynomial *b, polynomial *out){
   @param polynomial *out address of the resultant polynomial
 
   @return status is ok if polynomial is valid else returns illegalPoly_math.
- */
+*/
 pError multiply(polynomial *a, double double_coeff, polynomial *out){
   pError status = ok;
   
@@ -138,6 +137,7 @@ pError multiply(polynomial *a, double double_coeff, polynomial *out){
     status = illegalPoly_math; //poly is invalid, return error
     out->valid = FALSE;
   }
+
   verify(status); //check if any errors need to be printed   
   return status;
 }
@@ -150,7 +150,7 @@ pError multiply(polynomial *a, double double_coeff, polynomial *out){
   @param polynomial *out address of the resultant polynomial
 
   @return status is ok if polynomial is valid else returns illegalPoly_math.
- */
+*/
 pError divide(polynomial *a, double double_coeff, polynomial *out){
   pError status = ok;
   
@@ -171,6 +171,7 @@ pError divide(polynomial *a, double double_coeff, polynomial *out){
     status = illegalPoly_math; //poly is invalid, return error
     out->valid = FALSE;
   }
+
   verify(status);  //check if ay erros need to be printed
   return status;
 }
@@ -189,16 +190,16 @@ pError normalise(polynomial *a, polynomial *out){
   
   //run only if polynomial is valid.
   if( a->valid == TRUE ){
-  double norm;
-  //find the max which will become the normalising coeff
-  //loop will stop assigning values to the normal coeff
-  //at higher orders if they are 0.
-  for(int i = 0; i < a->length; i++){
-    if(a->coeff[i] != 0.0)
-      norm = a->coeff[i]; //this eventually becomes the normalising factor
-  }
-  //use divide function from before :)
-  divide(a, norm, out);
+    double norm;
+    //find the max which will become the normalising coeff
+    //loop will stop assigning values to the normal coeff
+    //at higher orders if they are 0.
+    for(int i = 0; i < a->length; i++){
+      if(a->coeff[i] != 0.0)
+	norm = a->coeff[i]; //this eventually becomes the normalising factor
+    }
+    //use divide function from before :)
+    divide(a, norm, out);
   } else {
     status = illegalPoly_math; //poly is invalid, return error
     out->valid = FALSE;

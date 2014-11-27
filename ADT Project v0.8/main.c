@@ -66,6 +66,9 @@ int main(){
   subtract(&a, &b, &difference);
   printPolynomial(&difference);
 
+  printf("Attempting to delete poly(sum) multiply times.\n");
+  deletePolynomial(&sum);
+  deletePolynomial(&sum);
   deletePolynomial(&sum);
   deletePolynomial(&difference);
 
