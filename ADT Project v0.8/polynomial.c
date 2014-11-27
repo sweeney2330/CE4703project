@@ -61,13 +61,17 @@ void createPolynomial(polynomial *a, int size, double coeff[]){
   @param polynomial *a the polynomial to be deleted
  */
 void deletePolynomial(polynomial *a){
+  pError status = ok;
+
   //if the polynomial is valid then run
   if(a->valid == TRUE){
     free(a->coeff); //free allocated memory
     a->coeff = NULL; //assign NULL for good measure (can still acess if this is ommited, odd)
     a->valid = FALSE; //set the flag to FALSE as the poly is NULL now.
     a->length = 0; //just to have a clean delete, probably not needed.
-  }
+  }else status = illegalDelete;
+
+  verify(status);
   return;
 }
 
@@ -114,14 +118,17 @@ void verify(pError type){
   case ok:
     //no need to do anything it's all good.
     break;
+  case illegalDelete: //error from the delete function. trying to delete a poly already deleted
+    printf("Warning: Attemted to delete a polynomial already deleted. Delete call ignored.\n");
+    break;
   case illegalPoly_math: //error from arithmetic.c
-    printf("Error: Arithmetic operation failed. One or more illegal polynomials.\n");
+    printf("Warning: Arithmetic operation failed. One or more illegal polynomials.\n");
     break;
   case illegalPoly_print: //error from print function
-    printf("Error: Print operation failed. Illegal polynomial.\n");
+    printf("Warning: Print operation failed. Illegal polynomial.\n");
     break;
   case noMemory: //comes from createPolynomial(). only happens when using potatoes.
-    printf("Error: Insufficient memory to allocate data.\n");
+    printf("Warning: Insufficient memory to allocate data.\n");
     break;
   default: //for when the user tries modifies the error list. please don't.
     printf("Error: Something horribly went wrong.\n");

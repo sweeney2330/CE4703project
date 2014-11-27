@@ -99,8 +99,10 @@ pError subtract(polynomial *a, polynomial *b, polynomial *out){
       }
     }
     createPolynomial(out, size, data); //creates the polynomial.
-  } else status = illegalPoly_math; //poly is invalid, return error
-
+  } else {
+    status = illegalPoly_math; //poly is invalid, return error
+    out->valid = FALSE;
+  }
   verify(status); //check if any errors need to be printed
   return status;
 }
@@ -129,8 +131,10 @@ pError multiply(polynomial *a, double double_coeff, polynomial *out){
       data[i] = (a->coeff[i])*(double_coeff);
     }
     createPolynomial(out, size, data);
-  } else status = illegalPoly_math; //poly is invalid, return error
-
+  } else{
+    status = illegalPoly_math; //poly is invalid, return error
+    out->valid = FALSE;
+  }
   verify(status); //check if any errors need to be printed   
   return status;
 }
@@ -160,8 +164,10 @@ pError divide(polynomial *a, double double_coeff, polynomial *out){
       data[i] = (a->coeff[i])/(double_coeff);
     }
     createPolynomial(out, size, data); 
-  } else status = illegalPoly_math; //poly invalid, return error
-
+  } else {
+    status = illegalPoly_math; //poly is invalid, return error
+    out->valid = FALSE;
+  }
   verify(status);  //check if ay erros need to be printed
   return status;
 }
@@ -190,7 +196,10 @@ pError normalise(polynomial *a, polynomial *out){
   }
   //use divide function from before :)
   divide(a, norm, out);
-  } else status = illegalPoly_math; //poly invalid, return error
+  } else {
+    status = illegalPoly_math; //poly is invalid, return error
+    out->valid = FALSE;
+  }
   
   verify(status); //check if any errors need to be printed.
   return status;

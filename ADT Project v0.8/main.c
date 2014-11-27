@@ -104,6 +104,7 @@ int main(){
   printPolynomial(&c);
 
   coeff = 5;
+
   //multiply
   printf("A * %.2lf =  ", coeff);
   multiply(&a, coeff, &product);

@@ -16,7 +16,7 @@
 typedef enum {TRUE, FALSE} flag;
 
 //used to detect if any errors occured. 
-typedef enum {ok, noMemory, illegalPoly_math, illegalPoly_print} pError;
+typedef enum {ok, noMemory, illegalDelete, illegalPoly_math, illegalPoly_print} pError;
  
 //the structure used for every polynomial created.
 typedef struct{
